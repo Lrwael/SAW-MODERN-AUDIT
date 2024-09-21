@@ -27,10 +27,13 @@ sudo swapoff -a
 
 # Step 4: Install Kubernetes (kubeadm, kubelet, kubectl)
 # Add Kubernetes' official GPG key and save it to a keyring:
-curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+KUBERNETES_VERSION=1.29
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v$KUBERNETES_VERSION/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v$KUBERNETES_VERSION/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # Add the Kubernetes repository:
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+# Replace <codename> with your Ubuntu codename (e.g., focal for 20.04, jammy for 22.04)
 
 # Update package list and install Kubernetes components:
 sudo apt update
