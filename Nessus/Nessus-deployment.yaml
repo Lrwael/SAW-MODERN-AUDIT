@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nessus-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nessus
+  template:
+    metadata:
+      labels:
+        app: nessus
+    spec:
+      containers:
+      - name: nessus
+        image: sawmodernaudit/nessus-kube
+        ports:
+        - containerPort: 8834
