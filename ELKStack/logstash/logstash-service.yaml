@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: logstash-service
+spec:
+  selector:
+    app: logstash
+  ports:
+    - protocol: TCP
+      port: 5044         # The default Kibana port
+      targetPort: 5044     # The target port inside the container
+      nodePort: 30005     # The node port to access Kibana outside the cluster
+  type: NodePort 
