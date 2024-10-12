@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nessus-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: nessus
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: nessus
-        image: sawmodernaudit/nessus-kube
+        image: tenable/nessus:latest
         ports:
         - containerPort: 8834
