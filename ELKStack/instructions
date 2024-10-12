@@ -1,0 +1,8 @@
+nerdctl build -t custom-elasticsearch -f Dockerfile.elasticsearch .
+nerdctl build -t custom-logstash -f Dockerfile.logstash .
+nerdctl build -t custom-kibana -f Dockerfile.kibana .
+nerdctl push <your-dockerhub-username>/custom-elasticsearch
+nerdctl push <your-dockerhub-username>/custom-logstash
+nerdctl push <your-dockerhub-username>/custom-kibana
+
+kubectl apply -f ...-deployment.yaml

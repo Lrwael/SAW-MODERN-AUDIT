@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:8.6.0  # Replace with the appropriate version
+        ports:
+        - containerPort: 5044  # Port for Logstash
+        env:
+          - name: LOGSTASH_JAVA_OPTS
+            value: "-Xmx256m -Xms256m"  # Adjust Java memory settings as needed
+        volumeMounts:
+          - name: logstash-config
+            mountPath: /usr/share/logstash/pipeline
+      volumes:
+        - name: logstash-config
+          configMap:
+            name: logstash-config  # Reference to a ConfigMap for Logstash configuration
+
