@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: nessus
-        image: tenable/nessus:latest
+        image: tenable/nessus:latest-ubuntu
         ports:
         - containerPort: 8834
