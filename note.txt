@@ -1,0 +1,4 @@
+kubeview commands:
+kubectl port-forward service/kubeview -n kubeview 8080:80
+
+nessus activation key:

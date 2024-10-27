@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: elasticsearch-deployment
 spec:
-  replicas: 1
+  replicas: 1 
   selector:
     matchLabels:
       app: elasticsearch
@@ -13,7 +13,14 @@ spec:
         app: elasticsearch
     spec:
       containers:
-      - name: elasticsearch
-        image: sawmodernaudit/elasticsearch-kube
-        ports:
-        - containerPort: 9200
+        - name: elasticsearch
+          image: elasticsearch:8.15.2
+          ports:
+            - containerPort: 9200
+          env:
+            - name: discovery.type
+              value: single-node 
+            - name: ELASTIC_PASSWORD
+              value: "admin"
+            - name: xpack.security.enabled
+              value: "true"
